@@ -1,0 +1,35 @@
+{
+  "name": "contexthub-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Problem-centered desktop workspace for AI coding workflows.",
+  "main": "build-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"npm:dev:electron\"",
+    "dev:electron": "wait-on http://localhost:5173 && cross-env NODE_ENV=development npm run build:electron && electron .",
+    "build": "npm run build:renderer && npm run build:electron && npm run copy:schema",
+    "build:renderer": "vite build",
+    "build:electron": "tsc -p tsconfig.electron.json && npm run copy:schema",
+    "copy:schema": "node scripts/copy-schema.mjs",
+    "start": "electron .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "better-sqlite3": "latest",
+    "concurrently": "latest",
+    "cross-env": "latest",
+    "electron": "latest",
+    "vite": "latest",
+    "wait-on": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}
